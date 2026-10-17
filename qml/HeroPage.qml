@@ -56,7 +56,7 @@ Item {
                 radius: LingmoUI.Theme.hugeRadius
                 gradient: Gradient {
                     GradientStop { position: 0.0; color: Qt.rgba(0, 0, 0, 0.05) }
-                    GradientStop { position: 1.0; color: Qt.rgba(0, 0, 0, 0.35) }
+                    GradientStop { position: 1.0; color: LingmoUI.Theme.overlayScrimColor }
                 }
             }
 
@@ -114,8 +114,8 @@ Item {
             onClicked: page.start()
             Keys.onReturnPressed: page.start()
         }
-
-        QuietButton {
+        LingmoUI.ActionButton {
+            flat: true
             Layout.alignment: Qt.AlignHCenter
             text: qsTr("Skip for now")
             onClicked: page.skip()

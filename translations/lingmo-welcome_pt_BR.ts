@@ -121,8 +121,8 @@
     </message>
     <message>
         <location filename="../qml/EffectsPage.qml" line="117"/>
-        <source>Flip through your windows like the pages of a book instead of a strip of previews.</source>
-        <translation>Folheie as janelas como as páginas de um livro, em vez de uma faixa de miniaturas.</translation>
+        <source>Flip through your windows like the pages of a book instead of the carousel.</source>
+        <translation>Folheie as janelas como as páginas de um livro, em vez do carrossel.</translation>
     </message>
     <message>
         <location filename="../qml/EffectsPage.qml" line="125"/>

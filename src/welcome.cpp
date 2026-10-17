@@ -326,7 +326,7 @@ void Welcome::setMagicLamp(bool enabled)
 QString Welcome::switcherLayout() const
 {
     const KConfig kwinrc(QStringLiteral("kwinrc"), KConfig::CascadeConfig);
-    return kwinrc.group(QStringLiteral("TabBox")).readEntry("LayoutName", QStringLiteral("ling_thumbnail"));
+    return kwinrc.group(QStringLiteral("TabBox")).readEntry("LayoutName", QStringLiteral("lingmo_carousel"));
 }
 
 void Welcome::setSwitcherLayout(const QString &layout)

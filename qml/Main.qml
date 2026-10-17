@@ -110,8 +110,8 @@ LingmoUI.Window {
 
         Behavior on opacity { NumberAnimation { duration: LingmoUI.Units.longDuration } }
         Behavior on height { NumberAnimation { duration: LingmoUI.Units.longDuration; easing.type: LingmoUI.Units.easing } }
-
-        QuietButton {
+        LingmoUI.ActionButton {
+            flat: true
             anchors.left: parent.left
             anchors.leftMargin: LingmoUI.Units.largeSpacing * 2
             anchors.verticalCenter: parent.verticalCenter

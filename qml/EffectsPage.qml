@@ -127,9 +127,9 @@ StepPage {
                 Layout.bottomMargin: LingmoUI.Units.smallSpacing
                 icon: "preferences-system-windows"
                 title: qsTr("Alt+Tab page flip")
-                description: qsTr("Flip through your windows like the pages of a book instead of a strip of previews.")
+                description: qsTr("Flip through your windows like the pages of a book instead of the carousel.")
                 checked: welcome.switcherLayout === "ling_flip"
-                onToggled: (on) => welcome.setSwitcherLayout(on ? "ling_flip" : "ling_thumbnail")
+                onToggled: (on) => welcome.setSwitcherLayout(on ? "ling_flip" : "lingmo_carousel")
             }
         }
     }
