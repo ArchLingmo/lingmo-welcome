@@ -292,7 +292,7 @@ bool Welcome::defaultEnabled(const QString &id) const
 
 bool Welcome::isEffectEnabled(const QString &id) const
 {
-    // The user's kwinrc cascaded over the system ones (/etc/xdg/kwinrc holds Lingmo's defaults)
+    // The user's kwinrc cascaded over the system ones (/usr/share/lingmo/xdg/kwinrc holds Lingmo's defaults)
     const KConfig kwinrc(QStringLiteral("kwinrc"), KConfig::CascadeConfig);
     const KConfigGroup plugins = kwinrc.group(QStringLiteral("Plugins"));
     const QString key = id + QStringLiteral("Enabled");
