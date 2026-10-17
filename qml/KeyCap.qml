@@ -26,11 +26,11 @@ Rectangle {
     property alias text: _label.text
 
     implicitWidth: Math.max(implicitHeight, _label.implicitWidth + LingmoUI.Units.largeSpacing * 1.2)
-    implicitHeight: 28
+    implicitHeight: LingmoUI.Units.smallControlHeight
     radius: 7
-    color: LingmoUI.Theme.darkMode ? "#46464A" : "#FFFFFF"
+    color: LingmoUI.Theme.darkMode ? LingmoUI.Theme.alternateBackgroundColor : LingmoUI.Theme.secondBackgroundColor
     border.width: 1
-    border.color: LingmoUI.Theme.darkMode ? Qt.rgba(1, 1, 1, 0.10) : Qt.rgba(0, 0, 0, 0.14)
+    border.color: LingmoUI.Theme.borderColor
 
     // Bottom edge of the key
     Rectangle {
@@ -49,7 +49,7 @@ Rectangle {
     Label {
         id: _label
         anchors.centerIn: parent
-        font.pointSize: LingmoUI.Theme.fontSize * 0.92
+        font.pointSize: LingmoUI.Units.fontCaption
         font.weight: Font.DemiBold
     }
 }

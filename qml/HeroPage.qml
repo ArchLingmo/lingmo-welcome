@@ -86,7 +86,7 @@ Item {
             Layout.topMargin: LingmoUI.Units.largeSpacing
             horizontalAlignment: Text.AlignHCenter
             text: qsTr("Welcome to ArchLingmo")
-            font.pointSize: LingmoUI.Theme.fontSize * 2.2
+            font.pointSize: LingmoUI.Units.fontDisplay
             font.weight: Font.Bold
             wrapMode: Text.WordWrap
         }
@@ -97,27 +97,26 @@ Item {
             Layout.rightMargin: LingmoUI.Units.largeSpacing * 4
             horizontalAlignment: Text.AlignHCenter
             text: qsTr("A few quick steps to make this desktop yours. You can change everything later in Settings.")
-            color: LingmoUI.Theme.disabledTextColor
-            font.pointSize: LingmoUI.Theme.fontSize * 1.05
+            color: LingmoUI.Theme.secondaryTextColor
+            font.pointSize: LingmoUI.Units.fontBody
             wrapMode: Text.WordWrap
         }
 
-        WelcomeButton {
+        LingmoUI.ActionButton {
             Layout.alignment: Qt.AlignHCenter
             Layout.topMargin: LingmoUI.Units.largeSpacing
             Layout.preferredWidth: Math.max(implicitWidth, 200)
-            implicitHeight: 42
+            Layout.preferredHeight: LingmoUI.Units.controlHeight + 8
             primary: true
-            fontScale: 1.1
+            font.pointSize: LingmoUI.Units.fontSubheading
             text: qsTr("Get started")
             focus: true
             onClicked: page.start()
             Keys.onReturnPressed: page.start()
         }
 
-        WelcomeButton {
+        QuietButton {
             Layout.alignment: Qt.AlignHCenter
-            flat: true
             text: qsTr("Skip for now")
             onClicked: page.skip()
         }

@@ -42,11 +42,18 @@ StepPage {
         { keys: ["Super", "R"], text: qsTr("Reload the desktop") }
     ]
 
-    Card {
+    LingmoUI.Card {
+        id: shortcutsCard
+        Layout.fillWidth: true
+        implicitHeight: grid.implicitHeight + LingmoUI.Units.largeSpacing * 3
+
         GridLayout {
-            Layout.fillWidth: true
-            Layout.topMargin: LingmoUI.Units.smallSpacing
-            Layout.bottomMargin: LingmoUI.Units.smallSpacing
+            id: grid
+            anchors.fill: parent
+            anchors.leftMargin: shortcutsCard.padding
+            anchors.rightMargin: shortcutsCard.padding
+            anchors.topMargin: LingmoUI.Units.largeSpacing * 1.5
+            anchors.bottomMargin: LingmoUI.Units.largeSpacing * 1.5
             columns: 2
             columnSpacing: LingmoUI.Units.largeSpacing * 3
             rowSpacing: LingmoUI.Units.largeSpacing * 0.9
@@ -74,7 +81,7 @@ StepPage {
                                     anchors.verticalCenter: parent.verticalCenter
                                     text: "+"
                                     visible: index > 0
-                                    color: LingmoUI.Theme.disabledTextColor
+                                    color: LingmoUI.Theme.secondaryTextColor
                                 }
                                 KeyCap { text: modelData }
                             }
@@ -84,6 +91,7 @@ StepPage {
                     Label {
                         Layout.fillWidth: true
                         text: modelData.text
+                        font.pointSize: LingmoUI.Units.fontBody
                         elide: Text.ElideRight
                     }
                 }
@@ -91,7 +99,7 @@ StepPage {
         }
     }
 
-    WelcomeButton {
+    LingmoUI.ActionButton {
         Layout.topMargin: LingmoUI.Units.smallSpacing
         text: qsTr("Customize in Settings → Shortcuts")
         onClicked: welcome.openSettings("shortcuts")

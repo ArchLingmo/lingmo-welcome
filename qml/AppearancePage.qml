@@ -63,15 +63,24 @@ StepPage {
         }
     }
 
-    Card {
+    LingmoUI.Card {
+        id: accentCard
+        Layout.fillWidth: true
         Layout.topMargin: LingmoUI.Units.largeSpacing
+        implicitHeight: accentRow.implicitHeight + LingmoUI.Units.largeSpacing * 2
 
         RowLayout {
-            Layout.fillWidth: true
+            id: accentRow
+            anchors.fill: parent
+            anchors.leftMargin: accentCard.padding
+            anchors.rightMargin: accentCard.padding
+            anchors.topMargin: LingmoUI.Units.largeSpacing
+            anchors.bottomMargin: LingmoUI.Units.largeSpacing
             spacing: LingmoUI.Units.largeSpacing
 
             Label {
                 text: qsTr("Accent color")
+                font.pointSize: LingmoUI.Units.fontBody
                 Layout.fillWidth: true
             }
 
@@ -90,6 +99,7 @@ StepPage {
                         color: "transparent"
                         border.width: dot.checked || dotMouse.containsMouse ? 2.5 : 0
                         border.color: Qt.rgba(modelData.r, modelData.g, modelData.b, dot.checked ? 0.7 : 0.35)
+                        Behavior on border.width { NumberAnimation { duration: LingmoUI.Units.shortDuration } }
                     }
 
                     Rectangle {
@@ -99,16 +109,16 @@ StepPage {
                         radius: 12
                         color: modelData
                         scale: dotMouse.pressed ? 0.88 : 1
-                        Behavior on scale { NumberAnimation { duration: 100 } }
+                        Behavior on scale { NumberAnimation { duration: LingmoUI.Units.veryShortDuration } }
 
                         Rectangle {
                             anchors.centerIn: parent
                             width: 8
                             height: 8
                             radius: 4
-                            color: "white"
+                            color: LingmoUI.Theme.highlightedTextColor
                             scale: dot.checked ? 1 : 0
-                            Behavior on scale { NumberAnimation { duration: 180; easing.type: Easing.OutBack } }
+                            Behavior on scale { NumberAnimation { duration: LingmoUI.Units.shortDuration; easing.type: Easing.OutBack } }
                         }
                     }
 

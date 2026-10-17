@@ -58,8 +58,8 @@ Item {
                                                                 : "transparent"
             scale: mouse.pressed ? 0.98 : 1
 
-            Behavior on border.color { ColorAnimation { duration: 150 } }
-            Behavior on scale { NumberAnimation { duration: 120 } }
+            Behavior on border.color { ColorAnimation { duration: LingmoUI.Units.shortDuration } }
+            Behavior on scale { NumberAnimation { duration: LingmoUI.Units.veryShortDuration } }
 
             // Desktop
             Rectangle {
@@ -185,20 +185,22 @@ Item {
                 radius: 8
                 color: control.checked ? control.accent : "transparent"
                 border.width: control.checked ? 0 : 1.5
-                border.color: LingmoUI.Theme.disabledTextColor
+                border.color: LingmoUI.Theme.secondaryTextColor
+                Behavior on color { ColorAnimation { duration: LingmoUI.Units.shortDuration } }
 
                 Rectangle {
                     anchors.centerIn: parent
                     width: 6
                     height: 6
                     radius: 3
-                    color: "white"
+                    color: LingmoUI.Theme.highlightedTextColor
                     visible: control.checked
                 }
             }
 
             Label {
                 id: _label
+                font.pointSize: LingmoUI.Units.fontBody
                 font.weight: control.checked ? Font.DemiBold : Font.Normal
             }
         }

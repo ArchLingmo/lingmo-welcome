@@ -61,7 +61,7 @@ StepPage {
                                                                                 LingmoUI.Theme.highlightColor.g,
                                                                                 LingmoUI.Theme.highlightColor.b, 0.4)
                                                                       : "transparent"
-                    Behavior on border.color { ColorAnimation { duration: 150 } }
+                    Behavior on border.color { ColorAnimation { duration: LingmoUI.Units.shortDuration } }
                 }
 
                 RoundedImage {
@@ -71,7 +71,7 @@ StepPage {
                     source: "file://" + modelData
                     decodeSize: Qt.size(400, 250)
                     scale: mouse.pressed ? 0.97 : mouse.containsMouse ? 1.02 : 1
-                    Behavior on scale { NumberAnimation { duration: 150; easing.type: Easing.OutCubic } }
+                    Behavior on scale { NumberAnimation { duration: LingmoUI.Units.shortDuration; easing.type: LingmoUI.Units.easing } }
                 }
 
                 // Check badge
@@ -84,16 +84,16 @@ StepPage {
                     radius: 11
                     color: LingmoUI.Theme.highlightColor
                     border.width: 2
-                    border.color: "white"
+                    border.color: LingmoUI.Theme.highlightedTextColor
                     scale: thumb.checked ? 1 : 0
-                    Behavior on scale { NumberAnimation { duration: 200; easing.type: Easing.OutBack } }
+                    Behavior on scale { NumberAnimation { duration: LingmoUI.Units.shortDuration; easing.type: Easing.OutBack } }
 
                     Canvas {
                         anchors.fill: parent
                         onPaint: {
                             const ctx = getContext("2d")
                             ctx.reset()
-                            ctx.strokeStyle = "white"
+                            ctx.strokeStyle = String(LingmoUI.Theme.highlightedTextColor)
                             ctx.lineWidth = 2
                             ctx.lineCap = "round"
                             ctx.lineJoin = "round"
@@ -119,10 +119,12 @@ StepPage {
 
     }
 
-    Label {
+    LingmoUI.EmptyState {
+        Layout.fillWidth: true
+        Layout.topMargin: LingmoUI.Units.largeSpacing * 2
         visible: welcome.wallpapers.length === 0
+        iconName: "preferences-desktop-wallpaper"
         text: qsTr("No wallpapers were found.")
-        color: LingmoUI.Theme.disabledTextColor
     }
 
     Item { Layout.fillHeight: true }

@@ -28,22 +28,20 @@ Item {
 
     property bool active: false
 
-    component LinkTile: Rectangle {
+    component LinkTile: LingmoUI.Card {
         id: tile
 
         property alias icon: _icon.source
         property alias text: _text.text
         property alias hint: _hint.text
-        signal clicked()
 
         Layout.fillWidth: true
         Layout.preferredHeight: 150
         radius: LingmoUI.Theme.bigRadius
-        color: mouse.containsMouse ? Qt.darker(LingmoUI.Theme.secondBackgroundColor, LingmoUI.Theme.darkMode ? 0.85 : 1.03)
-                                   : LingmoUI.Theme.secondBackgroundColor
-        scale: mouse.pressed ? 0.97 : 1
-        Behavior on color { ColorAnimation { duration: 150 } }
-        Behavior on scale { NumberAnimation { duration: 120 } }
+        clickable: true
+        liftOnHover: true
+        scale: tile.pressed ? 0.97 : 1
+        Behavior on scale { NumberAnimation { duration: LingmoUI.Units.veryShortDuration } }
 
         ColumnLayout {
             anchors.centerIn: parent
@@ -53,8 +51,8 @@ Item {
             LingmoUI.IconItem {
                 id: _icon
                 Layout.alignment: Qt.AlignHCenter
-                Layout.preferredWidth: 48
-                Layout.preferredHeight: 48
+                Layout.preferredWidth: LingmoUI.Units.iconSizes.large
+                Layout.preferredHeight: LingmoUI.Units.iconSizes.large
                 Layout.bottomMargin: LingmoUI.Units.smallSpacing
                 smooth: true
             }
@@ -63,6 +61,7 @@ Item {
                 id: _text
                 Layout.fillWidth: true
                 horizontalAlignment: Text.AlignHCenter
+                font.pointSize: LingmoUI.Units.fontBody
                 font.weight: Font.DemiBold
                 elide: Text.ElideRight
             }
@@ -71,18 +70,10 @@ Item {
                 id: _hint
                 Layout.fillWidth: true
                 horizontalAlignment: Text.AlignHCenter
-                color: LingmoUI.Theme.disabledTextColor
-                font.pointSize: LingmoUI.Theme.fontSize * 0.9
+                color: LingmoUI.Theme.secondaryTextColor
+                font.pointSize: LingmoUI.Units.fontCaption
                 elide: Text.ElideRight
             }
-        }
-
-        MouseArea {
-            id: mouse
-            anchors.fill: parent
-            hoverEnabled: true
-            cursorShape: Qt.PointingHandCursor
-            onClicked: tile.clicked()
         }
     }
 
@@ -102,18 +93,18 @@ Item {
             radius: 38
             color: LingmoUI.Theme.highlightColor
             scale: page.active ? 1 : 0.6
-            Behavior on scale { NumberAnimation { duration: 450; easing.type: Easing.OutBack } }
+            Behavior on scale { NumberAnimation { duration: LingmoUI.Units.veryLongDuration; easing.type: Easing.OutBack } }
 
             Canvas {
                 id: check
                 anchors.fill: parent
                 property real progress: page.active ? 1 : 0
-                Behavior on progress { NumberAnimation { duration: 500; easing.type: Easing.OutCubic } }
+                Behavior on progress { NumberAnimation { duration: LingmoUI.Units.veryLongDuration; easing.type: LingmoUI.Units.easing } }
                 onProgressChanged: requestPaint()
                 onPaint: {
                     const ctx = getContext("2d")
                     ctx.reset()
-                    ctx.strokeStyle = "white"
+                    ctx.strokeStyle = String(LingmoUI.Theme.highlightedTextColor)
                     ctx.lineWidth = 6
                     ctx.lineCap = "round"
                     ctx.lineJoin = "round"
@@ -139,7 +130,7 @@ Item {
             Layout.topMargin: LingmoUI.Units.smallSpacing
             horizontalAlignment: Text.AlignHCenter
             text: qsTr("You're all set!")
-            font.pointSize: LingmoUI.Theme.fontSize * 2.1
+            font.pointSize: LingmoUI.Units.fontDisplay
             font.weight: Font.Bold
         }
 
@@ -147,8 +138,8 @@ Item {
             Layout.fillWidth: true
             horizontalAlignment: Text.AlignHCenter
             text: qsTr("Enjoy ArchLingmo. Come say hi to the community, and find everything else in Settings.")
-            color: LingmoUI.Theme.disabledTextColor
-            font.pointSize: LingmoUI.Theme.fontSize * 1.05
+            color: LingmoUI.Theme.secondaryTextColor
+            font.pointSize: LingmoUI.Units.fontBody
             wrapMode: Text.WordWrap
         }
 

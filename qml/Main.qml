@@ -33,7 +33,7 @@ LingmoUI.Window {
     title: qsTr("Welcome")
 
     background.opacity: LingmoUI.Theme.darkMode ? 0.9 : 0.97
-    header.height: 40
+    header.height: LingmoUI.Units.windowHeaderHeight
 
     readonly property int pageCount: 6
     readonly property int lastPage: pageCount - 1
@@ -68,8 +68,8 @@ LingmoUI.Window {
         visible: opacity > 0
         enabled: active
 
-        Behavior on x { NumberAnimation { duration: 380; easing.type: Easing.OutCubic } }
-        Behavior on opacity { NumberAnimation { duration: 280; easing.type: Easing.OutCubic } }
+        Behavior on x { NumberAnimation { duration: LingmoUI.Units.veryLongDuration; easing.type: LingmoUI.Units.easing } }
+        Behavior on opacity { NumberAnimation { duration: LingmoUI.Units.longDuration; easing.type: LingmoUI.Units.easing } }
     }
 
     Item {
@@ -108,14 +108,13 @@ LingmoUI.Window {
         opacity: root.current === 0 ? 0 : 1
         visible: opacity > 0
 
-        Behavior on opacity { NumberAnimation { duration: 250 } }
-        Behavior on height { NumberAnimation { duration: 250; easing.type: Easing.OutCubic } }
+        Behavior on opacity { NumberAnimation { duration: LingmoUI.Units.longDuration } }
+        Behavior on height { NumberAnimation { duration: LingmoUI.Units.longDuration; easing.type: LingmoUI.Units.easing } }
 
-        WelcomeButton {
+        QuietButton {
             anchors.left: parent.left
             anchors.leftMargin: LingmoUI.Units.largeSpacing * 2
             anchors.verticalCenter: parent.verticalCenter
-            flat: true
             text: qsTr("Skip")
             visible: root.current < root.lastPage
             onClicked: welcome.finish()
@@ -123,7 +122,7 @@ LingmoUI.Window {
 
         Row {
             anchors.centerIn: parent
-            spacing: 8
+            spacing: LingmoUI.Units.smallSpacing + 2
 
             Repeater {
                 model: root.pageCount - 1
@@ -135,10 +134,10 @@ LingmoUI.Window {
                     width: step === root.current ? 26 : 8
                     radius: 4
                     color: step <= root.current ? LingmoUI.Theme.highlightColor
-                                                : (LingmoUI.Theme.darkMode ? Qt.rgba(1, 1, 1, 0.2) : Qt.rgba(0, 0, 0, 0.15))
+                                                : LingmoUI.Theme.pressedColor
 
-                    Behavior on width { NumberAnimation { duration: 300; easing.type: Easing.OutCubic } }
-                    Behavior on color { ColorAnimation { duration: 300 } }
+                    Behavior on width { NumberAnimation { duration: LingmoUI.Units.longDuration; easing.type: LingmoUI.Units.easing } }
+                    Behavior on color { ColorAnimation { duration: LingmoUI.Units.longDuration } }
 
                     MouseArea {
                         anchors.fill: parent
@@ -156,12 +155,12 @@ LingmoUI.Window {
             anchors.verticalCenter: parent.verticalCenter
             spacing: LingmoUI.Units.largeSpacing
 
-            WelcomeButton {
+            LingmoUI.ActionButton {
                 text: qsTr("Back")
                 onClicked: root.go(root.current - 1)
             }
 
-            WelcomeButton {
+            LingmoUI.ActionButton {
                 primary: true
                 Layout.preferredWidth: Math.max(implicitWidth, 120)
                 text: root.current === root.lastPage ? qsTr("Finish") : qsTr("Next")

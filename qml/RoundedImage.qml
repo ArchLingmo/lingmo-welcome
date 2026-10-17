@@ -57,6 +57,6 @@ Item {
             radius: control.radius
         }
 
-        Behavior on opacity { NumberAnimation { duration: 250 } }
+        Behavior on opacity { NumberAnimation { duration: LingmoUI.Units.longDuration } }
     }
 }

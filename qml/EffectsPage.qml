@@ -57,15 +57,17 @@ StepPage {
             Label {
                 id: _title
                 Layout.fillWidth: true
+                font.pointSize: LingmoUI.Units.fontBody
                 font.weight: Font.DemiBold
-                opacity: row.supported ? 1 : 0.6
+                color: row.supported ? LingmoUI.Theme.textColor : LingmoUI.Theme.disabledTextColor
             }
 
             Label {
                 Layout.fillWidth: true
                 wrapMode: Text.WordWrap
                 text: row.supported ? row.description : qsTr("Requires video acceleration (GPU)")
-                color: row.supported ? LingmoUI.Theme.disabledTextColor : LingmoUI.Theme.orangeColor
+                font.pointSize: LingmoUI.Units.fontBody
+                color: row.supported ? LingmoUI.Theme.secondaryTextColor : LingmoUI.Theme.warningColor
             }
         }
 
@@ -81,46 +83,58 @@ StepPage {
     component Divider: Rectangle {
         Layout.fillWidth: true
         Layout.preferredHeight: 1
-        color: LingmoUI.Theme.darkMode ? Qt.rgba(1, 1, 1, 0.08) : Qt.rgba(0, 0, 0, 0.07)
+        color: LingmoUI.Theme.dividerColor
     }
 
-    Card {
-        spacing: LingmoUI.Units.largeSpacing * 1.2
+    LingmoUI.Card {
+        id: effectsCard
+        Layout.fillWidth: true
+        implicitHeight: effects.implicitHeight + LingmoUI.Units.largeSpacing * 2
 
-        EffectRow {
-            Layout.topMargin: LingmoUI.Units.smallSpacing
-            icon: "preferences-system-windows-move"
-            title: qsTr("Wobbly windows")
-            description: qsTr("Windows jiggle like jelly while you drag them around.")
-            supported: welcome.isEffectSupported("wobblywindows")
-            checked: welcome.revision >= 0 && welcome.isEffectEnabled("wobblywindows")
-            onToggled: (on) => welcome.setEffectEnabled("wobblywindows", on)
-        }
+        ColumnLayout {
+            id: effects
+            anchors.fill: parent
+            anchors.leftMargin: effectsCard.padding
+            anchors.rightMargin: effectsCard.padding
+            anchors.topMargin: LingmoUI.Units.largeSpacing
+            anchors.bottomMargin: LingmoUI.Units.largeSpacing
+            spacing: LingmoUI.Units.largeSpacing * 1.2
 
-        Divider {}
+            EffectRow {
+                Layout.topMargin: LingmoUI.Units.smallSpacing
+                icon: "preferences-system-windows-move"
+                title: qsTr("Wobbly windows")
+                description: qsTr("Windows jiggle like jelly while you drag them around.")
+                supported: welcome.isEffectSupported("wobblywindows")
+                checked: welcome.revision >= 0 && welcome.isEffectEnabled("wobblywindows")
+                onToggled: (on) => welcome.setEffectEnabled("wobblywindows", on)
+            }
 
-        EffectRow {
-            icon: "desktop-effects"
-            title: qsTr("Magic lamp when minimizing")
-            description: qsTr("Windows slide into the dock like a genie going back into its lamp.")
-            supported: welcome.isEffectSupported("magiclamp")
-            checked: welcome.revision >= 0 && welcome.isEffectEnabled("magiclamp")
-            onToggled: (on) => welcome.setMagicLamp(on)
-        }
+            Divider {}
 
-        Divider {}
+            EffectRow {
+                icon: "desktop-effects"
+                title: qsTr("Magic lamp when minimizing")
+                description: qsTr("Windows slide into the dock like a genie going back into its lamp.")
+                supported: welcome.isEffectSupported("magiclamp")
+                checked: welcome.revision >= 0 && welcome.isEffectEnabled("magiclamp")
+                onToggled: (on) => welcome.setMagicLamp(on)
+            }
 
-        EffectRow {
-            Layout.bottomMargin: LingmoUI.Units.smallSpacing
-            icon: "preferences-system-windows"
-            title: qsTr("Alt+Tab page flip")
-            description: qsTr("Flip through your windows like the pages of a book instead of a strip of previews.")
-            checked: welcome.switcherLayout === "ling_flip"
-            onToggled: (on) => welcome.setSwitcherLayout(on ? "ling_flip" : "ling_thumbnail")
+            Divider {}
+
+            EffectRow {
+                Layout.bottomMargin: LingmoUI.Units.smallSpacing
+                icon: "preferences-system-windows"
+                title: qsTr("Alt+Tab page flip")
+                description: qsTr("Flip through your windows like the pages of a book instead of a strip of previews.")
+                checked: welcome.switcherLayout === "ling_flip"
+                onToggled: (on) => welcome.setSwitcherLayout(on ? "ling_flip" : "ling_thumbnail")
+            }
         }
     }
 
-    WelcomeButton {
+    LingmoUI.ActionButton {
         Layout.topMargin: LingmoUI.Units.smallSpacing
         text: qsTr("More effects in Settings")
         onClicked: welcome.openSettings("effects")

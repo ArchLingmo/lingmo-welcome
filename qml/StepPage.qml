@@ -40,7 +40,7 @@ Item {
         Label {
             id: _title
             Layout.fillWidth: true
-            font.pointSize: LingmoUI.Theme.fontSize * 1.9
+            font.pointSize: LingmoUI.Units.fontTitle
             font.weight: Font.Bold
             wrapMode: Text.WordWrap
         }
@@ -49,8 +49,8 @@ Item {
             id: _subtitle
             Layout.fillWidth: true
             Layout.bottomMargin: LingmoUI.Units.largeSpacing
-            color: LingmoUI.Theme.disabledTextColor
-            font.pointSize: LingmoUI.Theme.fontSize * 1.05
+            color: LingmoUI.Theme.secondaryTextColor
+            font.pointSize: LingmoUI.Units.fontBody
             wrapMode: Text.WordWrap
             visible: text !== ""
         }

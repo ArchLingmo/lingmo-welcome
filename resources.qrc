@@ -8,8 +8,7 @@
         <file>qml/ShortcutsPage.qml</file>
         <file>qml/DonePage.qml</file>
         <file>qml/StepPage.qml</file>
-        <file>qml/Card.qml</file>
-        <file>qml/WelcomeButton.qml</file>
+        <file>qml/QuietButton.qml</file>
         <file>qml/RoundedImage.qml</file>
         <file>qml/ThemePreview.qml</file>
         <file>qml/KeyCap.qml</file>
