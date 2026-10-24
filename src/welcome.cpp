@@ -30,6 +30,7 @@
 #include <QGuiApplication>
 #include <QJsonDocument>
 #include <QJsonObject>
+#include <QLocale>
 #include <QProcess>
 #include <QQmlApplicationEngine>
 #include <QQmlContext>
@@ -71,6 +72,8 @@ Welcome::Welcome(QObject *parent)
 
     // Our wallpapers first, then a few of Lingmo's
     const QStringList preferred = {
+        QStringLiteral("silicio-light.jpg"),
+        QStringLiteral("silicio-dark.jpg"),
         QStringLiteral("lingmo-arch-monterey-4k.png"),
         QStringLiteral("archlingmo-light.jpg"),
         QStringLiteral("archlingmo-dark.jpg"),
@@ -201,6 +204,23 @@ QUrl Welcome::logoWhite() const
 QString Welcome::version() const
 {
     return QStringLiteral(LINGMO_WELCOME_VERSION);
+}
+
+QString Welcome::releaseName() const
+{
+    QSettings release(qEnvironmentVariable("LINGMO_RELEASE_FILE", "/etc/lingmo-release"), QSettings::IniFormat);
+    const bool portuguese = QLocale().language() == QLocale::Portuguese;
+    const QString pretty = release.value(portuguese ? "CODENAME_PT" : "CODENAME_EN",
+        release.value("CODENAME_PRETTY", release.value("VERSION_CODENAME"))).toString();
+    if (pretty.isEmpty())
+        return {};
+    return (pretty + " · " + release.value("VERSION").toString()).trimmed();
+}
+
+QString Welcome::releaseBlog() const
+{
+    QSettings release(qEnvironmentVariable("LINGMO_RELEASE_FILE", "/etc/lingmo-release"), QSettings::IniFormat);
+    return release.value("BLOG_URL").toString();
 }
 
 void Welcome::setDarkMode(bool dark)

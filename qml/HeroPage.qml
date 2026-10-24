@@ -115,6 +115,13 @@ Item {
             Keys.onReturnPressed: page.start()
         }
         LingmoUI.ActionButton {
+            visible: welcome.releaseBlog !== ""
+            flat: true
+            Layout.alignment: Qt.AlignHCenter
+            text: qsTr("What's new in this release") + (welcome.releaseName ? " · " + welcome.releaseName : "")
+            onClicked: welcome.openUrl(welcome.releaseBlog)
+        }
+        LingmoUI.ActionButton {
             flat: true
             Layout.alignment: Qt.AlignHCenter
             text: qsTr("Skip for now")

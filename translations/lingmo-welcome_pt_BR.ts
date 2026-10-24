@@ -152,6 +152,10 @@
         <source>Skip for now</source>
         <translation>Pular por enquanto</translation>
     </message>
+    <message>
+        <source>What's new in this release</source>
+        <translation>Novidades desta versão</translation>
+    </message>
 </context>
 <context>
     <name>Main</name>

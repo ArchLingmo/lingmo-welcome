@@ -45,6 +45,8 @@ class Welcome : public QObject
     Q_PROPERTY(QUrl logo READ logo CONSTANT)
     Q_PROPERTY(QUrl logoWhite READ logoWhite CONSTANT)
     Q_PROPERTY(QString version READ version CONSTANT)
+    Q_PROPERTY(QString releaseName READ releaseName CONSTANT)
+    Q_PROPERTY(QString releaseBlog READ releaseBlog CONSTANT)
 
 public:
     explicit Welcome(QObject *parent = nullptr);
@@ -63,6 +65,8 @@ public:
     QUrl logo() const;
     QUrl logoWhite() const;
     QString version() const;
+    QString releaseName() const;
+    QString releaseBlog() const;
 
     Q_INVOKABLE void setDarkMode(bool dark);
     Q_INVOKABLE void setAccentColor(int index);
