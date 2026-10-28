@@ -74,6 +74,8 @@ Welcome::Welcome(QObject *parent)
     const QStringList preferred = {
         QStringLiteral("silicio-light.jpg"),
         QStringLiteral("silicio-dark.jpg"),
+        QStringLiteral("axo-dia.jpg"),
+        QStringLiteral("axo-noite.jpg"),
         QStringLiteral("lingmo-arch-monterey-4k.png"),
         QStringLiteral("archlingmo-light.jpg"),
         QStringLiteral("archlingmo-dark.jpg"),

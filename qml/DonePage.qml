@@ -159,7 +159,7 @@ Item {
                 icon: "internet-web-browser"
                 text: qsTr("Website")
                 hint: qsTr("Downloads and documentation")
-                onClicked: welcome.openUrl("https://devalexandre.github.io/archlingmo/")
+                onClicked: welcome.openUrl("https://archlingmo.github.io/")
             }
 
             LinkTile {
