@@ -64,7 +64,7 @@ Item {
                 id: logo
                 anchors.centerIn: parent
                 width: Math.min(parent.width * 0.55, 420)
-                height: width * 652 / 2868
+                height: width * 300 / 1440
                 sourceSize: Qt.size(width * 2, height * 2)
                 source: welcome.logoWhite
                 fillMode: Image.PreserveAspectFit
